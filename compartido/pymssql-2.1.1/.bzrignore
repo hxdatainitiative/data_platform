@@ -1,0 +1,4 @@
+build
+_mssql.c
+pymssql.c
+tests/tests.cfg
