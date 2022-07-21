@@ -39,13 +39,13 @@ services:
 
     ports: 
 
-      - 8080 # Unsecured HTTP Web Port
+      - 8443 #HTTPS Port
       - 1433
       - 1434 
 
     environment: 
 
-      - NIFI_WEB_HTTP_PORT=8080 
+      - NIFI_WEB_HTTPS_PORT=8443 
 
       - NIFI_CLUSTER_IS_NODE=true 
 
@@ -64,6 +64,10 @@ services:
       - NIFI_PID_DIR=/opt/nifi/nifi-current/run 
 
       - NIFI_BASE_DIR=/opt/nifi
+
+      - SINGLE_USER_CREDENTIALS_USERNAME:${NIFI_USER}
+
+      - SINGLE_USER_CREDENTIALS_PASSWORD:${NIFI_PASS}
 
     networks:
 
