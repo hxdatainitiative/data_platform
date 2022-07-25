@@ -16,8 +16,6 @@ sudo apt install docker-compose -y
 
 #despliegue de nifi en docker
 cd ./nifi
-sudo su
-./variables.sh
 ./docker_nifi.sh
 cd ..
 

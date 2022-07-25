@@ -1,0 +1,3 @@
+#!/bin/bash
+# -*- ENCODING: UTF-8 -*-
+pyodbc==4.0.28

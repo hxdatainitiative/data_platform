@@ -1,0 +1,13 @@
+build
+*.c
+*.so
+a.out
+tmp/
+tests/tests.cfg
+*.venv
+*.pyc
+.tox
+dist
+*.egg
+*.egg-info
+docs/_build

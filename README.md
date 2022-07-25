@@ -1,3 +1,4 @@
+<<<<<<< HEAD
                                        Despliegue .sh usado
 
 
@@ -108,4 +109,9 @@ sudo docker exec -it sqlserverdb /opt/mssql-tools/bin/sqlcmd -c " \
 -Q "ALTER LOGIN SA WITH PASSWORD=\"$(read -sp "Enter new SA password: "; echo "${REPLY}")\"" "
 
 exit
+=======
+# data_platform
+Contains the Hx Data Platform for single click deploys
+'You can read information about the project here'
+>>>>>>> origin
 
