@@ -28,11 +28,7 @@ sudo apt install docker-compose -y
 ## Despliegue de NiFi en Docker
 cd ./nifi 
 
-sudo su
-
 ./variables.sh
-
-exit
 
 ./docker_nifi.sh 
 
@@ -63,17 +59,12 @@ cd ./sql_server
 
 ./docker_sql.sh 
 
+./pass_sql.sh
+
 cd .. 
 
 ### Instalación del driver para conexión con SQL Server
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_1:/mssql-jdbc-8.4.1.jre8.jar 
-
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_2:/mssql-jdbc-8.4.1.jre8.jar 
-
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_3:/mssql-jdbc-8.4.1.jre8.jar 
-
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar zookeeper:/mssql-jdbc-8.4.1.jre8.jar 
-
+sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi:/mssql-jdbc-8.4.1.jre8.jar 
 
 ## Conexión entre los contenedores por network
 sudo docker network connect my-net-sql jupyter_notebook_1
@@ -109,7 +100,6 @@ echo "USER_ACCESS="$USER_ACCESS"" >> "$destdir"
 
 echo "USER_PASS="$USER_PASS"" >> "$destdir"
 
-bash
 
 
 # superset.sh
@@ -162,16 +152,13 @@ exit
 
 ## pass_sql.sh
 ### Cambio de password por motivos de seguridad
-sudo docker exec -it sqlserverdb /opt/mssql-tools/bin/sqlcmd -c " \
 
--S localhost -U SA \ ;
+sudo docker exec -it sqlserverdb /opt/mssql-tools/bin/sqlcmd \
 
--P "$(read -sp "Enter current SA password: "; echo "${REPLY}")" \ ;
+-S localhost -U SA \
 
--Q "ALTER LOGIN SA WITH PASSWORD=\"$(read -sp "Ingrese su contraseña para SQL con 8 o + caracts, números y alguna mayusc: "; echo "${REPLY}")\"" "
+-P syJwY6sHsu \
 
-exit
-
+-Q "ALTER LOGIN SA WITH PASSWORD=\"$(read -sp "Ingrese su contraseña para SQL con 8 o + caracts, números y alguna mayusc: "; echo "${REPLY}")\""
 
 exit
-
