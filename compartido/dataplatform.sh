@@ -16,7 +16,6 @@ sudo apt install docker-compose -y
 
 #despliegue de nifi en docker
 cd ./nifi
-sudo su
 ./variables.sh
 ./docker_nifi.sh
 cd ..
@@ -35,15 +34,12 @@ cd ..
 
 #Despliegue de SQL Server en Docker
 cd ./sql_server
+./variables_sql.sh
 ./docker_sql.sh
-./pass_sql.sh
 cd ..
 
 #Instalación del driver para conexión con SQL Server
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_1:/mssql-jdbc-8.4.1.jre8.jar 
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_2:/mssql-jdbc-8.4.1.jre8.jar 
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi_nifi_3:/mssql-jdbc-8.4.1.jre8.jar 
-sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar zookeeper:/mssql-jdbc-8.4.1.jre8.jar 
+sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi:/mssql-jdbc-8.4.1.jre8.jar
 
 #Conexión entre los contenedores por network
 sudo docker network connect my-net-sql jupyter_notebook_1
