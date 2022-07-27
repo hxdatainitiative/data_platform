@@ -1,2 +1,3 @@
 ./compartido/.ssh
-
+./compartido/libmsodbcsql-17.7.so.2.1
+./compartido/sql_server/pass_sql.sh
