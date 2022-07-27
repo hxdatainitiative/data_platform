@@ -140,25 +140,16 @@ exit
 
 # docker_sql.sh
 ### Creación el contenedor
+
 sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
 
-sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Hxdataplatform2022!" \
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$(read -sp "Ingrese su contraseña para SQL con 8 o + caracts, números y alguna mayusc: "; echo "${REPLY}")" \
+
 --name sqlserverdb --hostname sqlserverdb \
+
 -d \
+
 mcr.microsoft.com/mssql/server:2022-latest
 
 exit
 
-
-## pass_sql.sh
-### Cambio de password por motivos de seguridad
-
-sudo docker exec -it sqlserverdb /opt/mssql-tools/bin/sqlcmd \
-
--S localhost -U SA \
-
--P syJwY6sHsu \
-
--Q "ALTER LOGIN SA WITH PASSWORD=\"$(read -sp "Ingrese su contraseña para SQL con 8 o + caracts, números y alguna mayusc: "; echo "${REPLY}")\""
-
-exit
