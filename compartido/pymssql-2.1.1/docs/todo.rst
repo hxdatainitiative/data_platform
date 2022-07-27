@@ -1,8 +1,0 @@
-====
-TODO
-====
-
-Documentation
-=============
-
-.. todolist::
