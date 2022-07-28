@@ -34,7 +34,6 @@ cd ..
 
 #Despliegue de SQL Server en Docker
 cd ./sql_server
-./variables_sql.sh
 ./docker_sql.sh
 cd ..
 
@@ -45,6 +44,13 @@ sudo docker cp ./mssql-jdbc-8.4.1.jre8.jar nifi:/mssql-jdbc-8.4.1.jre8.jar
 sudo docker network connect my-net-sql jupyter_notebook_1
 sudo docker network connect my-net-sql superset
 sudo docker network connect my-net-sql sqlserverdb
+
+
+#Instalación de Conda y MLflow
+cd ./mlflow
+./anaconda.sh
+./mlflow.sh
+./production.sh
 
 exit
 
