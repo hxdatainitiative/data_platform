@@ -34,7 +34,6 @@ cd ..
 
 #Despliegue de SQL Server en Docker
 cd ./sql_server
-./variables_sql.sh
 ./docker_sql.sh
 cd ..
 
