@@ -21,7 +21,7 @@ services:
 
       - SINGLE_USER_CREDENTIALS_PASSWORD=${USER_PASS}
 
-      - NIFI_WEB_PROXY_HOST=10.30.15.246:8443
+      - NIFI_WEB_PROXY_HOST=${IP_AD}:8443
 
     networks:
 
