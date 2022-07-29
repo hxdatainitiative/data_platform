@@ -50,6 +50,9 @@ sudo docker network connect my-net-sql sqlserverdb
 cd ./mlflow
 ./anaconda.sh
 ./mlflow.sh
+sudo docker cp ./database.sh superset:/app/database.sh
+./sqlcomm.sh
+./mlflow2.sh
 ./production.sh
 
 exit
