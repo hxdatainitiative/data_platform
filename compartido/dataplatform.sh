@@ -53,7 +53,6 @@ cd ./mlflow
 sudo docker cp ./database.sh superset:/app/database.sh
 ./sqlcomm.sh
 ./mlflow2.sh
-./production.sh
 
 exit
 
