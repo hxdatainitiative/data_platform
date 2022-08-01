@@ -195,7 +195,7 @@ exit
 ## mlflow2.sh
 sudo docker exec -it -u 0 superset /bin/bash -c "apt install -y gcc; 
 pip install -y  psycopg2; 
-mkdir ~/mlruns; 
+mkdir root/mlruns; 
 mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000 -d; 
 ###Production 
 cd /etc/systemd/system ;/ 
@@ -205,7 +205,7 @@ After=network.target
 [Service] 
 Restart=on-failure 
 RestartSec=30 
-ExecStart=/bin/bash -c 'PATH=~/anaconda3/envs/mlflow_env/bin/:$PATH exec mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000' 
+ExecStart=/bin/bash -c 'PATH=root/anaconda3/envs/mlflow_env/bin/:$PATH exec mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000' 
 [Install] 
 WantedBy=multi-user.target' > mlflow-tracking.service;/ 
 apt-get install systemctl;/ 
