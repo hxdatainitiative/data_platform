@@ -30,6 +30,7 @@ cd ..
 cd ./jupyter_notebook
 ./docker_jn.sh
 ./driver_jn.sh
+./great_expectationsInstall.sh
 cd ..
 
 #Despliegue de SQL Server en Docker
