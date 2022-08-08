@@ -1,0 +1,18 @@
+#!/bin/bash
+# -*- ENCODING: UTF-8 -*-
+version: "3.7"
+   
+services:
+  jupyter:
+    image: jupyter/scipy-notebook
+    container_name: jupyter_notebook_1
+    ports:
+      - "8888:8888"
+      - "1433/tcp"
+      - "1434/tcp"
+    volumes:
+            - /home/compartido/jupyter_notebook:/home/jovyan/work
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
+
