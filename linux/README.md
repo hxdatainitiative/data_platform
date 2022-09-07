@@ -133,6 +133,7 @@ Con el comando "docker ps" podrá ver el puerto que tiene asignado cada uno de l
 # MLflow
 ## anaconda.sh 
 ### Instalación de Anaconda
+```
 sudo docker exec -it -u 0 superset /bin/bash -c " 
 cd .. ;/ 
 apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6;/ 
@@ -142,17 +143,19 @@ export PATH="~/anaconda3/bin:$PATH" >> ~/.bashrc;/
 source ~/.bashrc; 
 " 
 exit
-
+```
 
 ## database.sh
 ### Creación de archivo para ejecución de los comandos SQL
+```
 createuser -e mlflow -s 
 psql -U postgres -c "CREATE DATABASE mlflow;" 
 psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE mlflow TO mlflow;" 
 exit 
-
+```
 
 ## mlflow.sh
+```
 sudo docker exec -it -u 0 superset /bin/bash -c " 
 cd .. ;/ 
 export PATH="~/anaconda3/bin:$PATH";/ 
@@ -170,9 +173,10 @@ pg_ctlcluster 13 main start;/
 service postgresql restart;/" 
 
 exit 
-
+```
 
 ## mlflow2.sh
+```
 sudo docker exec -it -u 0 superset /bin/bash -c "apt install -y gcc; 
 pip install -y  psycopg2; 
 mkdir root/mlruns; 
@@ -197,12 +201,15 @@ echo 'export MLFLOW_TRACKING_URI='http://0.0.0.0:8000'' >> ~/.bashrc;/
 " 
 
 exit 
-
+```
 
 ## sqlcom.sh
+```
 sudo docker exec -it -u postgres superset /bin/bash -c "./database.sh;" 
 exit 
+```
 =======
+
 Sin embargo le dejamos detallado como ingresar a cada uno de ellos:
 
 #### Nifi
