@@ -59,5 +59,12 @@ docker network connect my-net-sql jupyter_notebook_1
 docker network connect my-net-sql superset
 docker network connect my-net-sql sqlserverdb
 
+REM Instalacion de Conda y MLFlow
+cd ./mlflow
+docker cp ./database.sh superset:/app/database.sh
+docker cp ./mlflow-tracking.service superset:/etc/systemd/system/mlflow-tracking.service
+docker exec -it -u 0 superset /bin/bash -c " cd .. ; apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6; wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh; bash Anaconda3-2022.05-Linux-x86_64.sh -b -u; export PATH="~/anaconda3/bin:$PATH" >> ~/.bashrc; source ~/.bashrc"
+docker exec -it -u 0 superset /bin/bash -c "cd .. ; export PATH="~/anaconda3/bin:$PATH"; apt-get update -y; source ~/.bashrc; conda init fish; conda update conda -y; conda create -n mlflow_env -y; conda activate mlflow_env; conda install -y python ; pip install mlflow; apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all ; pg_ctlcluster 13 main start; service postgresql restart"
+docker exec -it -u postgres superset /bin/bash -c "./database.sh"
+docker exec -it -u 0 superset /bin/bash -c "apt install -y gcc; pip install -y  psycopg2; mkdir ~/mlruns; mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000 -d; cd /etc/systemd/system; apt-get install systemctl; systemctl daemon-reload; systemctl enable mlflow-tracking; systemctl start mlflow-tracking; echo 'export MLFLOW_TRACKING_URI='http://0.0.0.0:8000'' >> ~/.bashrc; . ~/.bashrc"
 pause
-cmd

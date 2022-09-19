@@ -46,5 +46,14 @@ sudo docker network connect my-net-sql jupyter_notebook_1
 sudo docker network connect my-net-sql superset
 sudo docker network connect my-net-sql sqlserverdb
 
+
+#Instalación de Conda y MLflow
+cd ./mlflow
+./anaconda.sh
+./mlflow.sh
+sudo docker cp ./database.sh superset:/app/database.sh
+./sqlcomm.sh
+./mlflow2.sh
+
 exit
 

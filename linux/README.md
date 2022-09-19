@@ -129,6 +129,87 @@ exit
 Para utilizar cada una de las aplicaciones deberá hacerlo desde el browser, ingresando IP:Puerto ; Por ej: localhost:8080
 Con el comando "docker ps" podrá ver el puerto que tiene asignado cada uno de los contenedores. 
 
+<<<<<<< HEAD:README.md
+# MLflow
+## anaconda.sh 
+### Instalación de Anaconda
+```
+sudo docker exec -it -u 0 superset /bin/bash -c " 
+cd .. ;/ 
+apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6;/ 
+wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh;/ 
+bash Anaconda3-2022.05-Linux-x86_64.sh -b;/ 
+export PATH="~/anaconda3/bin:$PATH" >> ~/.bashrc;/ 
+source ~/.bashrc; 
+" 
+exit
+```
+
+## database.sh
+### Creación de archivo para ejecución de los comandos SQL
+```
+createuser -e mlflow -s 
+psql -U postgres -c "CREATE DATABASE mlflow;" 
+psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE mlflow TO mlflow;" 
+exit 
+```
+
+## mlflow.sh
+```
+sudo docker exec -it -u 0 superset /bin/bash -c " 
+cd .. ;/ 
+export PATH="~/anaconda3/bin:$PATH";/ 
+apt-get update -y;/ 
+conda init fish;/ 
+conda update conda -y;/ 
+conda create -n mlflow_env -y;/ 
+###Instalación de MLflow 
+conda activate mlflow_env;/ 
+conda install -y python ;/ 
+pip install mlflow;/ 
+##Instalacion de PostgreSQL 
+apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all ;/ 
+pg_ctlcluster 13 main start;/ 
+service postgresql restart;/" 
+
+exit 
+```
+
+## mlflow2.sh
+```
+sudo docker exec -it -u 0 superset /bin/bash -c "apt install -y gcc; 
+pip install -y  psycopg2; 
+mkdir root/mlruns; 
+mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000 -d; 
+###Production 
+cd /etc/systemd/system ;/ 
+echo '[Unit] 
+Description=MLflow tracking server 
+After=network.target 
+[Service] 
+Restart=on-failure 
+RestartSec=30 
+ExecStart=/bin/bash -c 'PATH=root/anaconda3/envs/mlflow_env/bin/:$PATH exec mlflow server --backend-store-uri postgresql://mlflow:mlflow@localhost/mlflow --default-artifact-root file:/home/your_user/mlruns -h 0.0.0.0 -p 8000' 
+[Install] 
+WantedBy=multi-user.target' > mlflow-tracking.service;/ 
+apt-get install systemctl;/ 
+systemctl daemon-reload;/ 
+systemctl enable mlflow-tracking;/ 
+systemctl start mlflow-tracking;/ 
+echo 'export MLFLOW_TRACKING_URI='http://0.0.0.0:8000'' >> ~/.bashrc;/ 
+. ~/.bashrc 
+" 
+
+exit 
+```
+
+## sqlcom.sh
+```
+sudo docker exec -it -u postgres superset /bin/bash -c "./database.sh;" 
+exit 
+```
+=======
+
 Sin embargo le dejamos detallado como ingresar a cada uno de ellos:
 
 #### Nifi
