@@ -125,3 +125,10 @@ Para esto debe correr el comando: docker network inspect my-net-sql
 
 Luego buscar la "IPAddress" asignada al contenedor "sqlserverdb", esa ingresará en el siguiente string. El string sería:
 mssql+pymssql://usuarioSQL:contraseñaSQL@IPAddress/database
+
+##### Instalación de SSMS
+En caso de querer instalar SQL Server Management Studio, esta le permitirá administrar el motor de base de datos y escribir código de Transact-SQL, visite el siguiente link:
+https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
+
+Link de descarga:
+https://aka.ms/ssmsfullsetup
